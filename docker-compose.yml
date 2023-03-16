@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  app:
+    build: .
+    ports:
+      - "8088:80"
+    depends_on:
+      - db
+    environment:
+      - APP_ENV=local
+    volumes:
+      - .:/var/www/html
+
+  db:
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=equalifyroot
+      - MYSQL_DATABASE=equalify
+      - MYSQL_USER=equalify
+      - MYSQL_PASSWORD=equalify
+    volumes:
+      - equalifydb_data:/var/lib/mysql
+
+volumes:
+  equalifydb_data:
